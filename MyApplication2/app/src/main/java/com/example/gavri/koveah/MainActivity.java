@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Resources res = getResources();
-        projectsView = (ListView) findViewById(R.id.projects);
-        addProject = (Button) findViewById(R.id.projectButton);
+        projectsView = findViewById(R.id.projects);
+        addProject = findViewById(R.id.projectButton);
 
 //        projects.setAdapter(new ArrayAdapter<String>(this, R.layout.projects_detail, sefarim));
 
@@ -77,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
         Project p = new Project(id, name, page, null, 0, null, null);
         DB.projectsDao().insert(p);
         id++;
+    }
+
+    public static void getProject() {
+        
     }
 
     private static boolean hasPermissions(Context context, String... permissions) {
