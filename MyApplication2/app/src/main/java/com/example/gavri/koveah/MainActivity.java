@@ -17,10 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button addProject;
     ListView projectsView;
-    String[] sefarim;
-    String[] daf;
-    AppDatabase DB;
+    static AppDatabase DB;
     List<Project> projects;
+    static int id = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         Resources res = getResources();
         projectsView = (ListView) findViewById(R.id.projects);
         addProject = (Button) findViewById(R.id.projectButton);
-        sefarim = res.getStringArray(R.array.sefarim);
-        daf = res.getStringArray(R.array.daf);
 
 //        projects.setAdapter(new ArrayAdapter<String>(this, R.layout.projects_detail, sefarim));
 
@@ -45,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         addProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addProjectActivity = new Intent(getApplicationContext(), DetailActivity.class);
+                Intent addProjectActivity = new Intent(getApplicationContext(), AddNewProject.class);
                 startActivity(addProjectActivity);
             }
         });
@@ -68,4 +65,12 @@ public class MainActivity extends AppCompatActivity {
     public void createDB() {
         DB = AppDatabase.getInMemoryDatabase(this.getApplication());
     }
+
+    public static void addProject(String name, int page) {
+        Project p = new Project(id, name, page, null, 0, null, null);
+        DB.projectsDao().insert(p);
+        id++;
+    }
+
+
 }

@@ -9,9 +9,9 @@ import android.widget.EditText;
 
 public class AddNewProject extends AppCompatActivity {
 
-    String sefer, page;
     Button create;
-
+    String book;
+    int page;
     EditText seferInput;
     EditText pageInput;
 
@@ -27,11 +27,9 @@ public class AddNewProject extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sefer = seferInput.getText().toString();
-                page = pageInput.getText().toString();
-
-                System.out.println("sefer: " + sefer);
-                System.out.println("page: " + page);
+                book = seferInput.getText().toString();
+                page = Integer.parseInt(pageInput.getText().toString());
+                MainActivity.addProject(book, page);
 
                 System.out.println("submit pressed");
                 Intent returnToMain = new Intent(AddNewProject.this, MainActivity.class);

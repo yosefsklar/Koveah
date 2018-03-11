@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
         summaries = res.getStringArray(R.array.summary);
 
         Intent in = getIntent();
-        int index = in.getIntExtra("projects_index", -1);
+        int index = in.getIntExtra("projects_index", 0);
 
         projectView = (TextView) findViewById(R.id.projectView);
         sessionView = (TextView) findViewById(R.id.sessionView);
