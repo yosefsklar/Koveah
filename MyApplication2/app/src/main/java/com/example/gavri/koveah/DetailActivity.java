@@ -89,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         mAudioFileName += getFilesDir().getAbsolutePath() + "/recording.mp4";
-
+        timer = findViewById(R.id.timer);
         takeImageButton = findViewById(R.id.take_image);
         takeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override

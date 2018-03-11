@@ -1,8 +1,11 @@
 package com.example.gavri.koveah;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,9 +23,13 @@ public class MainActivity extends AppCompatActivity {
     static AppDatabase DB;
     List<Project> projects;
     static int id = 1;
+    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (!hasPermissions(this, permissions))
+            ActivityCompat.requestPermissions(this, permissions, 1);
 
         createDB();
         this.projects = DB.projectsDao().getAllProjects();
@@ -70,6 +77,17 @@ public class MainActivity extends AppCompatActivity {
         Project p = new Project(id, name, page, null, 0, null, null);
         DB.projectsDao().insert(p);
         id++;
+    }
+
+    private static boolean hasPermissions(Context context, String... permissions) {
+        if (context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
