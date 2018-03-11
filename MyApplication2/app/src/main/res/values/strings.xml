@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Koveah</string>
+
+    <string-array name="sefarim">
+        <item>sanhedrin</item>
+        <item>makot</item>
+    </string-array>
+
+    <string-array name="daf">
+        <item>23a</item>
+        <item>6b</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>3:20:05</item>
+        <item>2:16:25</item>
+
+    </string-array>
+
+    <string-array name="summary">
+        <item>this is a summery</item>
+        <item>reminder from last time</item>
+    </string-array>
 </resources>

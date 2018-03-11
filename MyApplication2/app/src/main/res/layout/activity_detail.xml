@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gavri.koveah.DetailActivity">
+
+    <TextView
+        android:id="@+id/projectView"
+        android:layout_width="106dp"
+        android:layout_height="55dp"
+        android:text="Project"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/makomLabelView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Makom:"
+        android:textSize="20sp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/makomView"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/projectView"
+        app:layout_constraintHorizontal_bias="0.502" />
+
+    <TextView
+        android:id="@+id/makomView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The Makom"
+        android:textSize="20sp"
+        android:layout_marginRight="7dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/projectView" />
+
+    <TextView
+        android:id="@+id/sessionLabelView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recent Session:"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/makomLabelView" />
+
+    <TextView
+        android:id="@+id/sessionView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="the session"
+        android:textSize="20sp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/sessionLabelView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/makomView"
+        app:layout_constraintHorizontal_bias="0.505" />
+
+    <TextView
+        android:id="@+id/summaryLabelView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Summary"
+        android:textSize="20sp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/summaryView"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/sessionLabelView"
+        app:layout_constraintHorizontal_bias="0.502" />
+
+    <TextView
+        android:id="@+id/summaryView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="the summary"
+        android:textSize="20sp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/sessionView" />
+
+</android.support.constraint.ConstraintLayout>
