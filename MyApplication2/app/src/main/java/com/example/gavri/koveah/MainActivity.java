@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         addProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addPorjectActivity = new Intent(getApplicationContext(), DetailActivity.class);
-                showDetailActivity.putExtra("projects_index", i);
-                startActivity(showDetailActivity);
+                System.out.println("Button pressed");
+                Intent addPorjectActivity = new Intent(MainActivity.this, AddNewProject.class);
+                startActivity(addPorjectActivity);
             }
         });
 
