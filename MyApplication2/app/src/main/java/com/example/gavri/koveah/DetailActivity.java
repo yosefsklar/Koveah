@@ -61,7 +61,6 @@ public class DetailActivity extends AppCompatActivity {
         makomView.setText(daf[index]);
         summaryView.setText(summaries[index]);
 
-//        SessionAdaptor sessionAdaptor = new SessionAdaptor(this, sefarim[index], daf[index], sessions[index], summaries[index]);
 
         viewImageButton = findViewById(R.id.view_image);
         viewImageButton.setOnClickListener(new View.OnClickListener() {
