@@ -1,4 +1,4 @@
- 
+
 @Entity
  public class Projects{
    @PrimaryKey
@@ -10,59 +10,69 @@
    private String imageFile;//get absolute path
    private String audioFile;//
    
-   public Projects(int id){
-   	this.id = id;
+   public Projects(int id, String bookName, int page, String textMessage, Duration time, String imageFile, String audioFile){
+      this.id = id;
+      this.bookName = bookName;
+      this.page = page; 
+      this.textMessage = textMessage;
+      this.time = time;
+      this.imageFile = imageFile;
+      this.audioFile = audioFile;
    }
    public String getbookName(){
-   	return bookName;
+      return bookName;
    }
    public int getPage(){
-   	return page;
+      return page;
    }
    public String getTextMessage(){
-   	return textMessage;
+      return textMessage;
    }
    public Duration getTime(){
-   	return time;
+      return time;
    }
    public String getImageFile(){
-   	return imageFile;
+      return imageFile;
    }
    public String getAudioFile(){
-   	return audioFile;
+      return audioFile;
    }
  }
 
+
 @Dao
 public interface ProjectsDao {
-	@Insert(onConflict = IGNORE)
-	void insert(Projects project);
-	@Delete
-	void delete(Projects project);
+   @Insert(onConflict = IGNORE)
+   void insert(Projects project);
+   @Delete
+   void delete(Projects project);
 
-	@Query("UPDATE Projects SET bookName = :name WHERE id == :userIds")
-	public  updateBookName(String name, int userIds);  
+   @Query("UPDATE Projects SET bookName = :name WHERE id == :userIds")
+   public  updateBookName(String name, int userIds);  
 
-	@Query("UPDATE Projects SET page = :page WHERE id LIKE :userIds")
-	public  updatePage(int page, int userIds);  
+   @Query("UPDATE Projects SET page = :page WHERE id LIKE :userIds")
+   public  updatePage(int page, int userIds);  
 
-	@Query("UPDATE Projects SET textMessage = :textMessage WHERE id LIKE :userIds")
-	public  updateTextMessage(String textMessage, int userIds);  
+   @Query("UPDATE Projects SET textMessage = :textMessage WHERE id LIKE :userIds")
+   public  updateTextMessage(String textMessage, int userIds);  
 
-	@Query("UPDATE Projects SET time = :time WHERE id LIKE :userIds")
-	public  updateTime(Duration time, int userIds);  
+   @Query("UPDATE Projects SET time = :time WHERE id LIKE :userIds")
+   public  updateTime(Duration time, int userIds);  
 
-	@Query("UPDATE Projects SET imageFile = :imageFile WHERE id LIKE :userIds")
-	public  updateTime(String imageFile, int userIds);  
+   @Query("UPDATE Projects SET imageFile = :imageFile WHERE id LIKE :userIds")
+   public  updateTime(String imageFile, int userIds);  
 
-	@Query("UPDATE Projects SET audioFile = :audioFile WHERE id LIKE :userIds")
-	public  updateTime(String audioFile, int userIds); 
+   @Query("UPDATE Projects SET audioFile = :audioFile WHERE id LIKE :userIds")
+   public  updateTime(String audioFile, int userIds); 
 
-	@Query("Select * FROM Projects WHERE id LIKE :userIds")
-	public Projects findProjectById(int userId);
+   @Query("UPDATE Projects SET audioFile = :audioFile, page = :page, textMessage = :textMessage, time = :time, imageFile = :imageFile, audioFile= :audioFile  WHERE id LIKE :userIds")
+   public  update(Sting name, int page, String textMessage, Duration time, String imageFile, String audioFile, int userIds); 
 
-	@Query("Select * FROM Projects")
-	public List<Projects> getAllProjects();
+   @Query("Select * FROM Projects WHERE id LIKE :userIds")
+   public Projects findProjectById(int userId);
+
+   @Query("Select * FROM Projects")
+   public List<Projects> getAllProjects();
 
 
 }
@@ -72,13 +82,13 @@ public interface ProjectsDao {
    public abstract ProjectsDao projectsDao();
 
    public static AppDatabase getInMememoryDatabase(Context context){
-   	if(INSTANCE == null){
-   		INSTANCE = Room.InMemoryDatabaseBuilder(context.getApplicationContext(),
-   							AppDatabase.class,
-   							"database-filename")
-   							.build();
-   	}
-   	return INSTANCE;
+      if(INSTANCE == null){
+         INSTANCE = Room.InMemoryDatabaseBuilder(context.getApplicationContext(),
+                        AppDatabase.class,
+                        "database-filename")
+                        .build();
+      }
+      return INSTANCE;
    }
 
    public static void destroyInstance() {INSTANCE = null;}
@@ -86,8 +96,8 @@ public interface ProjectsDao {
 
  //
  private void fetchData(int id) {
- 	DB = AppDatabase.getInMemoryDatabase(getApplicationContext());
+   DB = AppDatabase.getInMemoryDatabase(getApplicationContext());
 
- 	StringBuilder sb = new StringBuilder();
- 	Projects project = DB.projectsDao().findProjectById(id);
+   StringBuilder sb = new StringBuilder();
+   Projects project = DB.projectsDao().findProjectById(id);
  }
