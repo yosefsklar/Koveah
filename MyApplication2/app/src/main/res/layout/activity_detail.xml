@@ -121,6 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
@@ -136,6 +137,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="View Image" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/record_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="New Recording" />
+
+            <Button
+                android:id="@+id/take_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Take Image" />
         </LinearLayout>
 
     </LinearLayout>

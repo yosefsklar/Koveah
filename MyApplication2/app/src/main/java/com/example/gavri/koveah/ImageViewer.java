@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 public class ImageViewer extends AppCompatActivity {
 
-    private ImageView picture;
-
-    Button closeButton;
+    private ImageView view_picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +18,12 @@ public class ImageViewer extends AppCompatActivity {
 
         Intent recieving = getIntent();
 
-        picture = findViewById(R.id.detailed_view);
-        if (picture != null)
-            picture.setImageBitmap(BitmapFactory.decodeFile(recieving.getStringExtra("image_path")));
+        view_picture = findViewById(R.id.detailed_view);
+        if (view_picture != null)
+            view_picture.setImageBitmap(BitmapFactory.decodeFile(recieving.getStringExtra("image_path")));
+
+
+
 
     }
 }
