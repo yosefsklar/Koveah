@@ -14,7 +14,7 @@
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/seferView"
+        android:id="@+id/seferInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
@@ -23,7 +23,7 @@
         android:text="Sefer" />
 
     <EditText
-        android:id="@+id/pageView"
+        android:id="@+id/pageInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
@@ -32,10 +32,10 @@
         android:text="Page" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/createButton"
         android:layout_width="122dp"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Create"
         android:textAlignment="center" />
 
 </LinearLayout>
