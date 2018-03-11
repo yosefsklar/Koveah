@@ -44,8 +44,8 @@ public interface ProjectsDao {
 //        @Query("UPDATE Project SET audioFile = :audioFile, page = :page, textMessage = :textMessage, time = :time, imageFile = :imageFile, audioFile= :audioFile  WHERE id LIKE :userIds")
 //        void  update(String name, int page, String textMessage, int time, String imageFile, String audioFile, int userIds);
 
-//        @Query("Select * FROM Project WHERE id LIKE :userIds")
-//        public Project findProjectById(int userId);
+        @Query("Select * FROM Project WHERE id LIKE :userIds")
+        public Project findProjectById(int userIds);
 
         @Query("Select * FROM Project")
         public List<Project> getAllProjects();

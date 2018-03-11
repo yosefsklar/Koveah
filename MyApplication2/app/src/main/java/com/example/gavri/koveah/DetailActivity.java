@@ -63,19 +63,18 @@ public class DetailActivity extends AppCompatActivity {
         sessions = res.getStringArray(R.array.time);
         summaries = res.getStringArray(R.array.summary);
 
+
         Intent in = getIntent();
         int index = in.getIntExtra("projects_index", 0);
-
+        Project p = MainActivity.getProject(index);
         projectView = findViewById(R.id.projectView);
         sessionView = findViewById(R.id.sessionView);
         makomView = findViewById(R.id.makomView);
         summaryView = findViewById(R.id.summaryView);
 
-        projectView.setText(sefarim[index]);
-        sessionView.setText(sessions[index]);
-        makomView.setText(daf[index]);
-        summaryView.setText(summaries[index]);
-
+        projectView.setText(p.getBookName());
+        makomView.setText(((Integer)p.getPage()).toString());
+        summaryView.setText(p.getTextMessage());
 
         viewImageButton = findViewById(R.id.view_image);
         viewImageButton.setOnClickListener(new View.OnClickListener() {

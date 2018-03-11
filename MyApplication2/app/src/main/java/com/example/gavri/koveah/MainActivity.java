@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     Button addProject;
     ListView projectsView;
     static AppDatabase DB;
-    List<Project> projects;
+    public List<Project> projects;
     static int id = 1;
     String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Intent showDetailActivity = new Intent(getApplicationContext(), DetailActivity.class);
-                showDetailActivity.putExtra("projects_index", i);
+                showDetailActivity.putExtra("projects_index", projects.get(i).getId());
                 startActivity(showDetailActivity);
             }
         });
@@ -79,8 +79,12 @@ public class MainActivity extends AppCompatActivity {
         id++;
     }
 
-    public static void getProject() {
-        
+    public static Project getProject(int id) {
+        return DB.projectsDao().findProjectById(id);
+    }
+
+    public List<Project> getProjects() {
+        return this.projects;
     }
 
     private static boolean hasPermissions(Context context, String... permissions) {
