@@ -2,18 +2,19 @@ package com.example.gavri.koveah;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import java.io.File;
@@ -34,7 +35,21 @@ public class DetailActivity extends AppCompatActivity {
     Button viewImageButton;
     Button takeImageButton;
     private String mCurrentPhotoPath;
-    private static final String LOG_TAG = "TakePicture";
+    private static final String LOG_TAG_PIC = "TakePicture";
+
+
+    Button newRecordingButton;
+    Button playRecordingButton;
+    private String mAudioFileName = "";
+    private MediaRecorder mRecorder = null;
+    private MediaPlayer mPlayer = null;
+    private static final String LOG_TAG_AUDIO = "AudioRecordTest";
+    private Chronometer timer = null;
+    private boolean recording = false;
+    private boolean playing = false;
+
+
+
 
 
     @Override
@@ -73,11 +88,38 @@ public class DetailActivity extends AppCompatActivity {
         });
 
 
+        mAudioFileName += getFilesDir().getAbsolutePath() + "/recording.mp4";
+
         takeImageButton = findViewById(R.id.take_image);
         takeImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dispatchTakePictureIntent();
+            }
+        });
+
+
+
+        newRecordingButton = findViewById(R.id.record_new);
+        newRecordingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (recording) {
+                    stopRecording();
+                } else {
+                    startRecording();
+                }
+            }
+        });
+
+        playRecordingButton = findViewById(R.id.play_recording);
+        playRecordingButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (!playing) {
+                    playRecording();
+                } else {
+                    stopPlaying();
+                }
             }
         });
     }
@@ -110,7 +152,7 @@ public class DetailActivity extends AppCompatActivity {
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
-                Log.e(LOG_TAG, ex.getMessage());
+                Log.e(LOG_TAG_PIC, ex.getMessage());
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
@@ -123,5 +165,70 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+
+
+
+    
+
+    private void startRecording() {
+        //Reset Text
+        newRecordingButton.setText("Stop");
+
+        //Disable button
+        playRecordingButton.setEnabled(false);
+
+        //Copied from android docs
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        mRecorder.setOutputFile(mAudioFileName);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e(LOG_TAG_AUDIO, e.getMessage());
+            Log.e(LOG_TAG_AUDIO, "prepare() failed");
+        }
+
+        mRecorder.start();
+        timer.setBase(SystemClock.elapsedRealtime());
+        timer.start();
+        recording = true;
+    }
+
+    private void stopRecording() {
+        newRecordingButton.setText("Record");
+        playRecordingButton.setEnabled(true);
+
+        //Copied from android docs
+        mRecorder.stop();
+        mRecorder.release();
+        mRecorder = null;
+        timer.stop();
+
+        recording = false;
+    }
+
+    private void playRecording() {
+        mPlayer = new MediaPlayer();
+        playRecordingButton.setText("Stop");
+        try {
+            mPlayer.setDataSource(mAudioFileName);
+            mPlayer.prepare();
+            mPlayer.start();
+        } catch (IOException e) {
+            Log.e(LOG_TAG_AUDIO, e.getMessage());
+            Log.e(LOG_TAG_AUDIO, "prepare() failed");
+        }
+        playing = true;
+    }
+
+    private void stopPlaying() {
+        mPlayer.stop();
+        playRecordingButton.setText("Play");
+        playing = false;
+    }
 
 }
