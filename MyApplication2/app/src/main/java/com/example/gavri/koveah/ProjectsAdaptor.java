@@ -8,6 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
+
+
 /**
  * Created by gavri on 3/11/2018.
  */
@@ -15,23 +19,21 @@ import android.widget.TextView;
 public class ProjectsAdaptor extends BaseAdapter {
 
     LayoutInflater mInflator;
-    String[] sefarim;
-    String[] daf;
+    List<Project> projects;
 
-    public ProjectsAdaptor(Context c, String[] s, String[] d) {
-        sefarim = s;
-        daf = d;
+    public ProjectsAdaptor(Context c, List<Project> projects) {
+        this.projects = projects;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return sefarim.length;
+        return projects.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return sefarim[position];
+        return projects.get(position);
     }
 
     @Override
@@ -45,13 +47,14 @@ public class ProjectsAdaptor extends BaseAdapter {
         TextView mesechetView = (TextView) v.findViewById(R.id.mesechetView);
         TextView dafView = (TextView) v.findViewById(R.id.dafView);
 
-        String sefer = sefarim[i];
-        String myDaf = daf[i];
+        String book = projects.get(i).getBookName();
+        String page = ((Integer) projects.get(i).getPage()).toString();
 
-        mesechetView.setText(sefer);
-        dafView.setText(myDaf);
+        mesechetView.setText(book);
+        dafView.setText(page);
 
 
         return v;
     }
+
 }
