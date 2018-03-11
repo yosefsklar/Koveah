@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
@@ -60,12 +62,13 @@ public class MainActivity extends AppCompatActivity {
 
         viewPictureButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                picture.setImageBitmap(BitmapFactory.decodeFile(getExternalFilesDir(Environment.DIRECTORY_PICTURES) + "/takenpicture.jpg"));
+                picture.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
 
-                layout.addView(picture, new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
+                if (!hasChild(layout, picture))
+                    layout.addView(picture, new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            0));
 
                 setContentView(layout);
             }
@@ -77,10 +80,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dispatchTakePictureIntent();
 
-                layout.addView(viewPictureButton, new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
+                if (!hasChild(layout, viewPictureButton))
+                    layout.addView(viewPictureButton, new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            0));
 
                 setContentView(layout);
             }
@@ -147,5 +151,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
         }
+    }
+    
+    private boolean hasChild(View view, View child) {
+        for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++) {
+            if (((ViewGroup)view).getChildAt(i) == child) return true;
+        }
+        return false;
     }
 }
