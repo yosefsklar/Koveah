@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Sefer" />
+        android:hint="Book"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/pageInput"
@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Page" />
+        android:hint="Page"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/createButton"
