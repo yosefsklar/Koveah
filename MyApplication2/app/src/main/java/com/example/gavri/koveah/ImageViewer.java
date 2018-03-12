@@ -14,13 +14,13 @@ public class ImageViewer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_viewer);
+        setContentView(R.layout.image_viewer);
 
-        Intent recieving = getIntent();
+        Intent receiving = getIntent();
 
         view_picture = findViewById(R.id.detailed_view);
         if (view_picture != null)
-            view_picture.setImageBitmap(BitmapFactory.decodeFile(recieving.getStringExtra("image_path")));
+            view_picture.setImageBitmap(BitmapFactory.decodeFile(receiving.getStringExtra("image_path")));
 
 
 
