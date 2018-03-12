@@ -19,8 +19,7 @@ public class ImageViewer extends AppCompatActivity {
         Intent receiving = getIntent();
 
         view_picture = findViewById(R.id.detailed_view);
-        if (view_picture != null)
-            view_picture.setImageBitmap(BitmapFactory.decodeFile(receiving.getStringExtra("image_path")));
+        view_picture.setImageBitmap(BitmapFactory.decodeFile(receiving.getStringExtra("image_path")));
 
 
 
